@@ -7,13 +7,7 @@ import { User, userschema } from '../schemas/user.schema';
 @Module({
   imports: [DBFeature([{ name: User.name, schema: userschema }])],
   controllers: [UserController],
-  providers: [
-    UserService,
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: jwtGuard,
-    // },
-  ],
+  providers: [UserService],
   exports: [UserService],
 })
 export class UserModule {}

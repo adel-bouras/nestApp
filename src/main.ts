@@ -3,13 +3,12 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import * as cookieParser from 'cookie-parser';
-import { zodPipe } from './globalPipes/Zod.pipe';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: 'http://localhost:3000', // 🔹 Allow frontend requests
-    credentials: true, // 🔹 Allow cookies
+    origin: 'http://localhost:3000',
+    credentials: true,
   });
   const config = app.get(ConfigService);
   const PORT = config.get<number>('PORT') ?? 8000;
