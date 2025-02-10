@@ -2,11 +2,12 @@ import {
   Body,
   Controller,
   Post,
+  Req,
   Res,
   UseGuards,
   UsePipes,
 } from '@nestjs/common';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { AuthService } from './auth.service';
 import { registerGuard } from './guards/register.guard';
 import { localGuard } from './guards/local.strategy.guard';

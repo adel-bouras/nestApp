@@ -6,11 +6,14 @@ import * as cookieParser from 'cookie-parser';
 import { zodPipe } from './globalPipes/Zod.pipe';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    origin: 'http://localhost:3000', // 🔹 Allow frontend requests
+    credentials: true, // 🔹 Allow cookies
+  });
   const config = app.get(ConfigService);
   const PORT = config.get<number>('PORT') ?? 8000;
   app.use(cookieParser());
-  // app.useGlobalPipes(new zodPipe());
   // const swagger = new DocumentBuilder()
   //   .setTitle('Project documentation')
   //   .setDescription('our 2CS Project documentation')
@@ -23,4 +26,5 @@ async function bootstrap() {
   await app.listen(PORT);
   console.log(`URL : ${await app.getUrl()}`);
 }
+
 bootstrap();
